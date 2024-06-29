@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 80%;
+      max-width: 600px;
+    }
+    .container h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .task-input {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .task-input input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      flex: 1;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .task-input button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .task-input button:hover {
+      background-color: #0056b3;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 10px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ccc;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    li button {
+      padding: 8px 12px;
+      font-size: 14px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    li button.edit-btn {
+      background-color: #28a745;
+      color: #fff;
+    }
+    li button.edit-btn:hover {
+      background-color: #218838;
+    }
+    li button.delete-btn {
+      background-color: #dc3545;
+      color: #fff;
+    }
+    li button.delete-btn:hover {
+      background-color: #c82333;
+    }
+    li input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      flex: 1;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    li button.save-btn {
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    li button.save-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" class="container"></div>
+
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+ 
+  <script type="text/babel">
+    const { useState } = React;
+
+    function App() {
+      const [tasks, setTasks] = useState([]);
+      const [newTask, setNewTask] = useState('');
+      const [editIndex, setEditIndex] = useState(null);
+      const [editTask, setEditTask] = useState('');
+
+      const addTask = () => {
+        if (newTask.trim()) {
+          setTasks([...tasks, newTask.trim()]);
+          setNewTask('');
+        }
+      };
+
+      const deleteTask = (index) => {
+        const updatedTasks = tasks.filter((task, taskIndex) => taskIndex !== index);
+        setTasks(updatedTasks);
+      };
+
+      const startEditTask = (index) => {
+        setEditIndex(index);
+        setEditTask(tasks[index]);
+      };
+
+      const saveEditTask = () => {
+        const updatedTasks = tasks.map((task, index) => (index === editIndex ? editTask : task));
+        setTasks(updatedTasks);
+        setEditIndex(null);
+        setEditTask('');
+      };
+
+      return (
+        <div className="App">
+          <h1>To-Do List</h1>
+          <div className="task-input">
+            <input
+              type="text"
+              value={newTask}
+              onChange={(e) => setNewTask(e.target.value)}
+              placeholder="Add a new task"
+            />
+            <button onClick={addTask}>Add Task</button>
+          </div>
+          <ul>
+            {tasks.map((task, index) => (
+              <li key={index}>
+                {editIndex === index ? (
+                  <>
+                    <input
+                      type="text"
+                      value={editTask}
+                      onChange={(e) => setEditTask(e.target.value)}
+                    />
+                    <button className="save-btn" onClick={saveEditTask}>Save</button>
+                  </>
+                ) : (
+                  <>
+                    {task}
+                    <button className="edit-btn" onClick={() => startEditTask(index)}>Edit</button>
+                    <button className="delete-btn" onClick={() => deleteTask(index)}>Delete</button>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
