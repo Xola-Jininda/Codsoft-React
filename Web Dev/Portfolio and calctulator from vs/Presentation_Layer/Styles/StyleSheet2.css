@@ -1,0 +1,155 @@
+﻿/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+h1, h2 {
+    color: #1E90FF; /* DodgerBlue */
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(to right, #1E90FF, #00BFFF); /* DodgerBlue to DeepSkyBlue */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+    header h1 {
+        margin: 0;
+        font-size: 2.5em;
+    }
+
+    header p {
+        margin: 5px 0 0 0;
+        font-size: 1.2em;
+    }
+
+/* Section Styles */
+section {
+    margin: 20px 0;
+}
+
+    section h2 {
+        font-size: 1.8em;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #1E90FF; /* DodgerBlue */
+        padding-bottom: 5px;
+    }
+
+.profile-image {
+    display: block;
+    width: 150px;
+    border-radius: 50%;
+    margin: 10px auto 20px;
+}
+
+#about p, #contact p {
+    text-align: center;
+    font-size: 1.1em;
+}
+
+#skills ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#skills li {
+    background: #00BFFF; /* DeepSkyBlue */
+    color: white;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    flex: 1 1 30%;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+    #skills li:hover {
+        background: #1E90FF; /* DodgerBlue */
+    }
+
+.project {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+    .project img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .project h3 {
+        margin: 10px 0 5px;
+    }
+
+#resume a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: #1E90FF; /* DodgerBlue */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+    #resume a:hover {
+        background: #00BFFF; /* DeepSkyBlue */
+    }
+
+#contact a {
+    color: #1E90FF; /* DodgerBlue */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    #contact a:hover {
+        text-decoration: underline;
+    }
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background: #1E90FF; /* DodgerBlue */
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    #skills ul {
+        flex-direction: column;
+    }
+
+    #skills li {
+        flex: 1 1 100%;
+    }
+}
